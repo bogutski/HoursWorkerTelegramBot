@@ -44,11 +44,13 @@ bot.on('message', (msg) => {
       // check if rate is a number
       if (isNaN(rateNumber)) {
         bot.sendMessage(chatId, 'Please enter a number');
+        return;
       }
 
       // check if rate is a positive number
       else if (rateNumber <= 0) {
         bot.sendMessage(chatId, 'Please enter a positive number');
+        return;
       }
 
       // modify the rate of the user in the chats array
@@ -101,7 +103,9 @@ bot.on('message', (msg) => {
           rate = chats[i].rate;
         }
       }
-      const totalAmount = (totalTime / 60) * rate;
+
+      // calculate the total amount of money and round it to 2 decimal places
+      const totalAmount = +(rate * totalTime / 60).toFixed(2);
 
       // get hours and minutes from total time
       const hours = Math.floor(totalTime / 60);
