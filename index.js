@@ -38,6 +38,19 @@ bot.on('message', (msg) => {
     if (msg.text.startsWith('rate')) {
       const rate = msg.text.split(' ')[1];
 
+      // convert rate to number
+      const rateNumber = +rate;
+
+      // check if rate is a number
+      if (isNaN(rateNumber)) {
+        bot.sendMessage(chatId, 'Please enter a number');
+      }
+
+      // check if rate is a positive number
+      else if (rateNumber <= 0) {
+        bot.sendMessage(chatId, 'Please enter a positive number');
+      }
+
       // modify the rate of the user in the chats array
       // loop through the chats array
       // if the chatId of the current chat is the same as the chatId of the current user
